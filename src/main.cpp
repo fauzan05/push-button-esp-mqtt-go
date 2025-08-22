@@ -20,21 +20,6 @@ unsigned long debounceDelay = 50;
 WiFiClient espClient;
 PubSubClient client(espClient);
 
-void setup() {
-  Serial.begin(115200);
-  
-  // Setup button
-  pinMode(buttonPin, INPUT_PULLUP);
-  
-  // Connect to WiFi
-  setup_wifi();
-  
-  // Setup MQTT
-  client.setServer(mqtt_server, mqtt_port);
-  
-  Serial.println("ESP8266 Button to MQTT Ready!");
-}
-
 void setup_wifi() {
   delay(10);
   Serial.println();
@@ -52,6 +37,21 @@ void setup_wifi() {
   Serial.println("WiFi connected");
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
+}
+
+void setup() {
+  Serial.begin(115200);
+  
+  // Setup button
+  pinMode(buttonPin, INPUT_PULLUP);
+  
+  // Connect to WiFi
+  setup_wifi();
+  
+  // Setup MQTT
+  client.setServer(mqtt_server, mqtt_port);
+  
+  Serial.println("ESP8266 Button to MQTT Ready!");
 }
 
 void reconnect() {
